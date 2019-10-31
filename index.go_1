@@ -1,0 +1,86 @@
+package main
+
+import (
+	"context"
+	"fmt"
+
+	prisma "github.com/prismaTutorial/generated/prisma-client"
+)
+
+func main() {
+	client := prisma.New(nil)
+	ctx := context.TODO()
+
+	// Create a new user
+	name := "Alice"
+	newUser, err := client.CreateUser(prisma.UserCreateInput{
+		Name: name,
+	}).Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Created new user: %+v\n", newUser)
+
+	users, err := client.Users(nil).Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v\n", users)
+
+	// Fetch a user - get ID from above created user
+	//	id := "ck2co6u6p000m0718s8l7vbv9"
+	//	userById, err := client.User(prisma.UserWhereUniqueInput{
+	//		ID: &id,
+	//	}).Exec(ctx)
+	//
+	//	if err != nil {
+	//		fmt.Println("ERROR", err)
+	//	} else {
+	//		fmt.Println(*userById)
+	//	}
+
+	// Filter user list
+	//filter := "Alice"
+	//posts, err := client.Users(&prisma.UsersParams{
+	//	Where: &prisma.UserWhereInput{
+	//		Name: &filter,
+	//	},
+	//}).Exec(ctx)
+
+	//if err != nil {
+	//	fmt.Println("ERROR", err)
+	//} else {
+	//	fmt.Println(posts)
+	//}
+
+	// Update a users name - use id from user created above
+	//id := "ck2co6u6p000m0718s8l7vbv9"
+	//newName := "Bob"
+	//updatedUser, err := client.UpdateUser(prisma.UserUpdateParams{
+	//	Where: prisma.UserWhereUniqueInput{
+	//		ID: &id,
+	//	},
+	//	Data: prisma.UserUpdateInput{
+	//		Name: &newName,
+	//	},
+	//}).Exec(ctx)
+
+	//if err != nil {
+	//	fmt.Println("ERROR", err)
+	//} else {
+	//	fmt.Println(*updatedUser)
+	//}
+
+	// Delete a user
+	//id := "__USER_ID__"
+	//deletedUser, err := client.DeleteUser(prisma.UserWhereUniqueInput{
+	//	ID: &id,
+	//}).Exec(ctx)
+
+	//if err != nil {
+	//	fmt.Println("ERROR", err)
+	//} else {
+	//	fmt.Println(*deletedUser)
+	//}
+
+}
